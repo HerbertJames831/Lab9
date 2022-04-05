@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Storage } from '@ionic/storage-angular';
 
 @Component({
   selector: 'app-home',
@@ -6,7 +7,32 @@ import { Component } from '@angular/core';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
+myStatus:string = "";
+  constructor(private storage:Storage) {}
 
-  constructor() {}
+  ionViewWillEnter(){
+
+    this.storage.create()
+
+    .then( ()=>{
+      this.storage.get("status")
+      .then(
+
+        (data)=>{
+
+          this.myStatus = data;
+
+        }
+      
+
+      )
+
+
+    })
+
+    .catch();
+
+  }
+
 
 }
